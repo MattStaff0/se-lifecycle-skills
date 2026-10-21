@@ -34,6 +34,8 @@ Use one method or the other, not both — otherwise each skill loads twice.
 
 ## The workflow
 
+How to use each skill, with example prompts and where each one stops for you: [`USAGE.md`](USAGE.md).
+
 The week-by-week map of the course, which skill runs each step, and every point where a human decides: [`skills/se-new-repo-orchestrator/references/COURSE-LIFECYCLE.md`](skills/se-new-repo-orchestrator/references/COURSE-LIFECYCLE.md). Not sure where you are? Ask Claude to run `se-new-repo-orchestrator` (whole project) or `se-slice-orchestrator` (one use case); each diagnoses the repository and stops for you to pick.
 
 ## Where the templates come from
