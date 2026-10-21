@@ -1,0 +1,9 @@
+This product includes software developed by Bingyang Wei under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0).
+
+This NOTICE file must be retained in redistributions of this project.
+
+If modifications are made to this software, those modifications must retain this NOTICE file and clearly indicate that changes were made.
+
+---
+
+This repository (se-lifecycle-skills) adapts portions of Project Pulse (https://github.com/Washingtonwei/project-pulse). Changes were made: framework- and module-specific details were replaced with pointers to the target repository's own architecture-of-record, and course-specific steps were added. Each adapted file names the Project Pulse file it came from.

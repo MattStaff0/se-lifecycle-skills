@@ -1,0 +1,8 @@
+{
+  "name": "se-lifecycle-skills",
+  "description": "Spec-driven software engineering lifecycle skills: charter, requirements, use cases/SRS, arc42 architecture, design-of-record, implementation and calibration, plus greenfield and existing-repo orchestrators.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Matt Stafford"
+  }
+}

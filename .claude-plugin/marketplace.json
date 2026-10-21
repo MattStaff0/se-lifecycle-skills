@@ -1,0 +1,13 @@
+{
+  "name": "se-lifecycle-skills",
+  "owner": {
+    "name": "Matt Stafford"
+  },
+  "plugins": [
+    {
+      "name": "se-lifecycle-skills",
+      "source": "./",
+      "description": "Spec-driven software engineering lifecycle skills for Claude Code."
+    }
+  ]
+}
