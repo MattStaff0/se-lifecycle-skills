@@ -1,8 +1,9 @@
 {
-  "name": "se-lifecycle-skills",
-  "description": "Spec-driven software engineering lifecycle skills: charter, requirements, use cases/SRS, arc42 architecture, design-of-record, implementation and calibration, plus greenfield and existing-repo orchestrators.",
-  "version": "0.1.0",
+  "name": "sdd",
+  "displayName": "Spec-Driven Development",
+  "description": "A spec-driven, agent-assisted development cycle for application, data, and ML projects: charter, discovery, specification, architecture-of-record, design-of-record, and build-review-calibrate, with original templates and human decision gates.",
   "author": {
     "name": "Matt Stafford"
-  }
+  },
+  "license": "Apache-2.0"
 }

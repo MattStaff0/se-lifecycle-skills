@@ -6,4 +6,4 @@ If modifications are made to this software, those modifications must retain this
 
 ---
 
-This repository (se-lifecycle-skills) adapts portions of Project Pulse (https://github.com/Washingtonwei/project-pulse). Changes were made: framework- and module-specific details were replaced with pointers to the target repository's own architecture-of-record, and course-specific steps were added. Each adapted file names the Project Pulse file it came from.
+This repository (sdd, Spec-Driven Development skills) adapts portions of Project Pulse (https://github.com/Washingtonwei/project-pulse): the /design and /implement commands and the AGENTS.md layering. Changes were made: they were generalized from one Spring Boot and Vue codebase to application, data, and ML projects, and their paths are read from the target repository's AGENTS.md. Each adapted file names the Project Pulse file it came from.

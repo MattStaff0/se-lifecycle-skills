@@ -1,13 +1,14 @@
 {
-  "name": "se-lifecycle-skills",
+  "name": "spec-driven-dev",
+  "description": "Spec-driven, agent-assisted development skills for Claude Code.",
   "owner": {
     "name": "Matt Stafford"
   },
   "plugins": [
     {
-      "name": "se-lifecycle-skills",
+      "name": "sdd",
       "source": "./",
-      "description": "Spec-driven software engineering lifecycle skills for Claude Code."
+      "description": "The spec-driven cycle for application, data, and ML projects, with templates and human decision gates."
     }
   ]
 }
