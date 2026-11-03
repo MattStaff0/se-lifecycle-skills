@@ -1,49 +1,68 @@
-# se-lifecycle-skills
+# Spec-Driven Development (`sdd`)
 
-Claude Code skills that encode a spec-driven software engineering lifecycle — from team charter through requirements, architecture, design, and implementation — so an AI agent works inside the same process a human team would.
+Claude Code skills for building software with an AI agent without letting it invent your requirements or pile up code nobody understands. The agent drafts; you decide. Every decision that belongs to a person (what a stakeholder wants, how the system is shaped, every estimate, whether code is right) is a gate the skills stop at.
 
-## Skills
+It works for **application, data engineering, and ML projects**, and for a mix: a **slice** (the unit of work) is a use case for a feature, a data contract for a pipeline, or a model contract for a model.
 
-| Skill | Stage | What it scaffolds |
+## The cycle
+
+```mermaid
+flowchart TD
+    subgraph SETUP["Set up the project: once, and again when scope changes"]
+        N["0 · Napkin"] --> C["1 · Charter"] --> D["2 · Discover"] --> K["3 · Specify"] --> A["4 · Architecture"] --> P["5 · Proving slice"]
+    end
+    subgraph LOOP["The slice cycle: repeat for every slice"]
+        CH["Challenge"] --> DS["Design"] --> ES["Build-context and estimate"] --> IM["Implement: trunk, pause, leaves"] --> RV["Review"] --> CL["Close and calibrate"]
+        CL -->|next slice| CH
+    end
+    P --> CH
+    CH -.->|spec defect| K
+    DS -.->|changes the architecture| A
+    CL -.->|agent got it wrong twice| C
+    CL -.->|scope changed| D
+```
+
+The full method, the gates, and how to size it to a bug fix, an experiment, or an existing codebase: [`skills/lifecycle/references/cycle.md`](skills/lifecycle/references/cycle.md). How each step changes for data and ML: [`skills/lifecycle/references/project-types.md`](skills/lifecycle/references/project-types.md). How to use each skill: [`USAGE.md`](USAGE.md).
+
+## The skills
+
+| Skill | Step | What it produces |
 |---|---|---|
-| `se-charter-and-governance` | Charter | `AGENTS.md` / `CLAUDE.md`, `.claude/settings.json` deny rules, team contract |
-| `se-requirements-foundation` | Requirements | Glossary, vision & scope, business rules, open issues |
-| `se-use-cases-and-srs` | Requirements | Use cases, EARS-style SRS, traceability matrix |
-| `se-architecture-of-record` | Architecture | arc42 architecture doc, C4 diagrams, ADRs |
-| `se-design-of-record` | Design | Per-area design docs, `/design` command |
-| `se-implementation-and-calibration` | Build | Estimation, build-context issues, trunk/leaf implementation, review triage |
-| `se-new-repo-orchestrator` | Orchestrator | Walks a greenfield repo through the lifecycle |
-| `se-slice-orchestrator` | Orchestrator | Walks a vertical slice through an existing repo |
+| `lifecycle` | Where am I? Napkin, set up `docs/`, proving slice | A diagnosis of the repository and the next step |
+| `charter` | 1 | `AGENTS.md` + `CLAUDE.md`, `.claude/settings.json` deny rules, team contract |
+| `discovery` | 2 | Interview records, glossary, vision and scope, open issues, business rules |
+| `specification` | 3 | Slice list; use cases, data contracts, or model contracts; requirements; traceability |
+| `architecture` | 4 | The architecture-of-record (arc42 structure, C4 diagrams, ranked requirements, key decisions) |
+| `design` | Slice | The design-of-record per area; experiments and spikes |
+| `build` | Slice | Estimates, build-context issues, trunk-and-leaf implementation, review, close and calibration |
+| `slice` | Slice | Where one slice is, and its next gate |
+
+Each skill copies its template (bundled in the skill, or the project's own if `AGENTS.md` names one), drafts only what the template lets an agent draft, and stops for the rest.
 
 ## Install
 
-**As a plugin (anyone):**
+The repository is private; access is by GitHub collaborator.
 
-```
-/plugin marketplace add MattStaff0/se-lifecycle-skills
-/plugin install se-lifecycle-skills@se-lifecycle-skills
-```
+1. **One-time, on each machine:** sign in to a GitHub account that has access, and let git use it:
+   ```bash
+   gh auth login
+   ```
+   ```bash
+   gh auth setup-git
+   ```
+2. **In Claude Code:**
+   ```
+   /plugin marketplace add MattStaff0/se-lifecycle-skills
+   /plugin install sdd@spec-driven-dev
+   ```
+3. **Use it:** in any repository, ask "where are we in the lifecycle?", or call a skill by name (`/sdd:design`).
 
-**For local development (live edits):** symlink each skill into `~/.claude/skills/`:
+**Updates:** `/plugin marketplace update spec-driven-dev`, or turn on auto-update for the marketplace under **Marketplaces** in `/plugin`.
 
-```bash
-for d in skills/*/; do ln -s "$PWD/$d" ~/.claude/skills/"$(basename "$d")"; done
-```
+## Course profile
 
-Use one method or the other, not both — otherwise each skill loads twice.
-
-## The workflow
-
-How to use each skill, with example prompts and where each one stops for you: [`USAGE.md`](USAGE.md).
-
-The week-by-week map of the course, which skill runs each step, and every point where a human decides: [`skills/se-new-repo-orchestrator/references/COURSE-LIFECYCLE.md`](skills/se-new-repo-orchestrator/references/COURSE-LIFECYCLE.md). Not sure where you are? Ask Claude to run `se-new-repo-orchestrator` (whole project) or `se-slice-orchestrator` (one use case); each diagnoses the repository and stops for you to pick.
-
-## Where the templates come from
-
-- **Course pages** are the source for the Napkin, the charter's contents, the team contract, the `.claude/settings.json` deny rules, the estimating and calibration rules, and the code-review checklist ([course site](https://washingtonwei.github.io/cosc-40943/)). Each file names the page it came from; where a page has changed since, the page wins.
-- **Course document templates** (glossary, vision and scope, business rules, open issues, use cases, SRS, traceability, architecture-of-record, design-of-record, PR template) are **not copied into this repo**. The skills read the current version from [`tcu-cosc-40943/course-templates`](https://github.com/tcu-cosc-40943/course-templates), from a local clone (pulled first) or straight from GitHub, because the templates are corrected during the semester.
-- **Agent setup** (the `AGENTS.md` boilerplate and the `/design`, `/implement`, `/estimate`, `/close-use-case` commands, the build-context issue, the review checklist, and the lifecycle map) is adapted from [Project Pulse](https://github.com/Washingtonwei/project-pulse), the course's running example. Each file states which Pulse file it came from and what changed.
+For TCU's COSC 40943, set `**Profile:** cosc-40943` in the project's `AGENTS.md`: the skills then read the course's templates live (they are not copied here), follow its calendar and checkpoints, and apply its rules. See [`skills/lifecycle/references/profiles/cosc-40943.md`](skills/lifecycle/references/profiles/cosc-40943.md).
 
 ## Attribution
 
-Portions of this repository are adapted from Project Pulse by Bingyang Wei, licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). The adapted files were modified: framework- and module-specific details were replaced with pointers to the target repository's own architecture-of-record, and course-specific steps were added.
+The method follows the spec-driven, agent-assisted approach taught in Bingyang Wei's COSC 40943 at TCU, including the Napkin and the trunk-and-leaf build. The `/design` and `/implement` commands and the `AGENTS.md` layering are adapted from Project Pulse by Bingyang Wei ([Washingtonwei/project-pulse](https://github.com/Washingtonwei/project-pulse)), licensed under the Apache License 2.0; see [`NOTICE`](NOTICE). The document templates are original, following public structures: arc42 and C4 for architecture, EARS for requirements, Conventional Comments for review.
