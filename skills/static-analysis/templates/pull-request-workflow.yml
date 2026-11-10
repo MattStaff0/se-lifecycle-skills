@@ -1,0 +1,96 @@
+# The pull request gate. Copy to .github/workflows/pull-request.yml, keep one job per part of the
+# stack, delete the example jobs that do not apply, and replace every <placeholder>.
+#
+# - Job names are what the main branch's ruleset requires, so choose them once and keep them.
+# - Checking modes only: no --fix, no --write, no `|| true`, no continue-on-error (a temporary
+#   warn-first check is the one exception, and it gets a debt row in §11 of the architecture-of-record).
+# - Pin every action to its full 40-character commit SHA, with the version in a comment. Look it up;
+#   never write one from memory (a made-up SHA fails with "unable to resolve action"):
+#       gh api repos/actions/checkout/commits/<tag> --jq .sha
+#   Dependabot's github-actions ecosystem then proposes updates as pull requests someone reads.
+# - Pin the analyzers' own versions in the project (lockfile, pinned dev requirements, plugin
+#   versions), so the gate gives the same answer tomorrow.
+# - An ordinary Linux runner; no device or platform build (record one left out as a §11 debt row).
+
+name: Pull request
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-request-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # Example: a Java backend in backend/, where `verify` runs the tests and the analyzers' check goals.
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@<sha> # <version>
+      - uses: actions/setup-java@<sha> # <version>
+        with:
+          distribution: temurin
+          java-version: "<version>"
+          cache: maven
+      - name: Build, test, and analyze
+        run: ./mvnw -B verify
+
+  # Example: a JavaScript or TypeScript frontend in frontend/.
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@<sha> # <version>
+      - uses: actions/setup-node@<sha> # <version>
+        with:
+          node-version: "<version>"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - name: Formatting
+        run: npx prettier --check .
+      - name: Lint
+        run: npx eslint .
+      - name: Type check
+        run: npm run type-check
+      - name: Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+
+  # Example: Python (an application, a pipeline, or model code), in the repository root.
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@<sha> # <version>
+      - uses: actions/setup-python@<sha> # <version>
+        with:
+          python-version: "<version>"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: Formatting
+        run: ruff format --check .
+      - name: Lint
+        run: ruff check .
+      - name: Type check
+        run: mypy .
+      - name: Tests
+        run: pytest
+
+  # Example: a Dockerfile in the repository root.
+  dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@<sha> # <version>
+      - uses: hadolint/hadolint-action@<sha> # <version>
+        with:
+          dockerfile: Dockerfile

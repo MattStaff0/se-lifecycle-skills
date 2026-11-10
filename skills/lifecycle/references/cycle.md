@@ -14,6 +14,7 @@ flowchart TD
         D --> K["3 · Specify<br/>slice list, slice contracts, requirements, traceability"]
         K --> A["4 · Architecture-of-record<br/>ranked quality attributes, components, conventions"]
         A --> P["5 · Pick the proving slice<br/>the riskiest slice"]
+        P --> G["6 · The gate<br/>analyzers required on every pull request"]
     end
 
     subgraph LOOP["The slice cycle: repeat for every slice"]
@@ -25,7 +26,7 @@ flowchart TD
         CL -->|next slice| CH
     end
 
-    P --> CH
+    G --> CH
     CH -.->|spec defect| K
     CH -.->|only a stakeholder knows| D
     DS -.->|changes the architecture| A
@@ -33,7 +34,7 @@ flowchart TD
     CL -.->|scope changed| D
 ```
 
-Solid arrows are the forward path. Dotted arrows are where a problem found late is fixed where it started, before the cycle picks up again. The spec, the architecture, and the code are kept in agreement all the time.
+The gate goes on with the proving slice's first code, before the first feature merges, so no baseline is ever needed. Solid arrows are the forward path. Dotted arrows are where a problem found late is fixed where it started, before the cycle picks up again. The spec, the architecture, and the code are kept in agreement all the time.
 
 | Step | Skill | Where the human decides |
 |---|---|---|
@@ -43,6 +44,7 @@ Solid arrows are the forward path. Dotted arrows are where a problem found late 
 | 3 Specify | `specification` | The slice list reviewed by stakeholders before detail; priorities; every threshold |
 | 4 Architecture | `architecture` | The ranking of quality attributes; every key decision |
 | 5 Proving slice | `lifecycle` | The pick |
+| 6 The gate | `static-analysis` | Which tools; every verdict that is not a fix; the workflow read line by line; the ruleset on the main branch |
 | Design | `design` | Your sketch first; accepting the shape; key decisions; the questions test; a teammate's merge |
 | Estimate, build, review, close | `build` | Every hour; the trunk pause; every new dependency; the merge; the retrospective |
 
@@ -82,7 +84,7 @@ Six prompts, about twenty minutes, before the agent sees the problem: **Shape** 
 | An experiment or spike | A time-box, a hypothesis, and a written result (`design/templates/experiment.md`). Notebook code is evidence, never production: the result goes into the spec or a decision, and the code is rebuilt through the slice cycle. |
 | A small project (one or two people, short-lived) | A floor of three: the charter (opening with a short vision and scope), slice contracts with their failure paths and inline rules, and a test list per slice. |
 | A team, real stakeholders, a long-lived system | The full cycle. |
-| An existing codebase with few docs | Recover the documents from the code, but **the code is evidence, never authority**: a stakeholder calls each recovered behavior intended, corrected, or a defect. Then run the cycle as usual. |
+| An existing codebase with few docs | Recover the documents from the code, but **the code is evidence, never authority**: a stakeholder calls each recovered behavior intended, corrected, or a defect. Put the gate on with a baseline that only shrinks (`static-analysis`), then run the cycle as usual. |
 
 ## One slice at a time
 

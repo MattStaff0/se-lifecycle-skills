@@ -9,13 +9,13 @@ It works for **application, data engineering, and ML projects**, and for a mix: 
 ```mermaid
 flowchart TD
     subgraph SETUP["Set up the project: once, and again when scope changes"]
-        N["0 · Napkin"] --> C["1 · Charter"] --> D["2 · Discover"] --> K["3 · Specify"] --> A["4 · Architecture"] --> P["5 · Proving slice"]
+        N["0 · Napkin"] --> C["1 · Charter"] --> D["2 · Discover"] --> K["3 · Specify"] --> A["4 · Architecture"] --> P["5 · Proving slice"] --> G["6 · The gate"]
     end
     subgraph LOOP["The slice cycle: repeat for every slice"]
         CH["Challenge"] --> DS["Design"] --> ES["Build-context and estimate"] --> IM["Implement: trunk, pause, leaves"] --> RV["Review"] --> CL["Close and calibrate"]
         CL -->|next slice| CH
     end
-    P --> CH
+    G --> CH
     CH -.->|spec defect| K
     DS -.->|changes the architecture| A
     CL -.->|agent got it wrong twice| C
@@ -33,6 +33,7 @@ The full method, the gates, and how to size it to a bug fix, an experiment, or a
 | `discovery` | 2 | Interview records, glossary, vision and scope, open issues, business rules |
 | `specification` | 3 | Slice list; use cases, data contracts, or model contracts; requirements; traceability |
 | `architecture` | 4 | The architecture-of-record (arc42 structure, C4 diagrams, ranked requirements, key decisions) |
+| `static-analysis` | 6 | Analyzers chosen and triaged, a pull request workflow required on the main branch, a baseline that only shrinks, custom rules |
 | `design` | Slice | The design-of-record per area; experiments and spikes |
 | `build` | Slice | Estimates, build-context issues, trunk-and-leaf implementation, review, close and calibration |
 | `slice` | Slice | Where one slice is, and its next gate |
@@ -65,4 +66,4 @@ For TCU's COSC 40943, set `**Profile:** cosc-40943` in the project's `AGENTS.md`
 
 ## Attribution
 
-The method follows the spec-driven, agent-assisted approach taught in Bingyang Wei's COSC 40943 at TCU, including the Napkin and the trunk-and-leaf build. The `/design` and `/implement` commands and the `AGENTS.md` layering are adapted from Project Pulse by Bingyang Wei ([Washingtonwei/project-pulse](https://github.com/Washingtonwei/project-pulse)), licensed under the Apache License 2.0; see [`NOTICE`](NOTICE). The document templates are original, following public structures: arc42 and C4 for architecture, EARS for requirements, Conventional Comments for review.
+The method follows the spec-driven, agent-assisted approach taught in Bingyang Wei's COSC 40943 at TCU, including the Napkin and the trunk-and-leaf build. The `/design` and `/implement` commands and the `AGENTS.md` layering are adapted from Project Pulse by Bingyang Wei ([Washingtonwei/project-pulse](https://github.com/Washingtonwei/project-pulse)), licensed under the Apache License 2.0; see [`NOTICE`](NOTICE). The `static-analysis` skill follows the course's Static Analysis module and its gate studio. The document templates are original, following public structures: arc42 and C4 for architecture, EARS for requirements, Conventional Comments for review.

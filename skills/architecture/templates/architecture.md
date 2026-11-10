@@ -62,7 +62,7 @@ _[After the proving slice runs: one sequence diagram for it, through the contain
 
 ## 7. Deployment view
 
-_[Once there is a pipeline: where each container runs in each environment, how a merged change gets there, and what state survives a restart.]_
+_[Once there is a pipeline: where each container runs in each environment, how a merged change gets there (which checks run where: editor, before pushing, pull request, schedule, deploy), and what state survives a restart.]_
 
 ## 8. Crosscutting concepts
 
@@ -87,6 +87,7 @@ _[One short subsection per concept: the rule in one sentence, why, and the file 
 | Data quality and lineage (data, ML) | Where are checks run, what happens on failure, how is lineage recorded? |
 | Reproducibility (data, ML) | How is a run or a model rebuilt exactly (versions, seeds, snapshots)? |
 | Testing | Which kinds of test, at which layer, with what data? |
+| Static analysis | Which analyzers run, what is the gate command, and how is a finding settled? (the `static-analysis` skill) |
 
 ## 9. Architecture decisions
 

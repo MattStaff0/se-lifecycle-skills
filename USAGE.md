@@ -44,6 +44,12 @@ When a step finishes, ask again; it re-reads the repo instead of guessing.
 **You get:** the architecture document: context and container diagrams, components, security, crosscutting conventions (including data quality, lineage, and reproducibility for data and ML), key decisions.
 **It stops for you:** the ranking of the significant requirements and every key decision.
 
+### `static-analysis`: the gate every change must pass
+**Say:** "Add static analysis to this project" · "Run the analyzers and count the findings by rule" · "Triage these findings" · "Set up the pull request gate" · "Turn this review comment into a lint rule"
+**You get:** the tools proposed per rung with their latest releases; a first run counted by rule, with nothing fixed; the workflow (checking modes only, actions pinned to SHAs) and its pull request with the comparison table; on an existing codebase, a baseline that only shrinks; the §8.2 subsection and the charter lines.
+**It stops for you:** which tools; every verdict that is not a fix (each suppression, rule turned off, baseline entry); reading the workflow line by line; creating the ruleset on the main branch and watching a planted bug go red.
+**When:** with the proving slice, before the first feature merges; on an existing codebase, any time, with a baseline.
+
 ### `design`: the last document before the code
 **Say:** "Design `UC-…`" · "Run an experiment on whether …"
 **You get:** `docs/design/<area>.md` (flows labeled by contract step, the contract, decisions, the data or ML specifics, the test list), or an experiment record.
