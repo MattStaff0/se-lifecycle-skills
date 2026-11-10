@@ -28,7 +28,7 @@ Write it as the first line of the review, so the depth is a decision a teammate 
 - **Data:** every output has its data tests; a rerun produces the same result; a late or malformed input does what the contract says (stop, quarantine, flag); no personal data in logs or fixtures.
 - **ML:** evaluation runs on the held-out set only (no test-set tuning, no leakage across the split); the model beats the baseline overall **and** on every named failure slice; the fallback is tested; the run is reproducible (versions, seeds, data snapshot); no notebook code was merged as production.
 
-Style, formatting, and unused code are the linter's job; leave them to a non-blocking nit.
+Style, formatting, and unused code are the linter's job; leave them to a non-blocking nit. The gate is green before review starts, and every suppression or baseline change in the diff is read as code: its reason is a claim you can check, and a baseline only shrinks.
 
 ## Write the review
 

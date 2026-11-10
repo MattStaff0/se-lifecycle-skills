@@ -43,6 +43,8 @@ _[The exact commands, in order, that take a clean machine to a running system.]_
 
 _[All tests; one test; data tests; evaluation; and what passing means.]_
 
+_[The gate: the one command, the same the pull request runs, that must pass before a change is done (the `static-analysis` skill). Passing tests alone is not passing the gate.]_
+
 ## Conventions
 
 The binding conventions live once, in the crosscutting concepts section of the architecture-of-record. Each line here is a reminder that links to it.
@@ -61,6 +63,7 @@ The binding conventions live once, in the crosscutting concepts section of the a
 - **Never answer for a stakeholder.** A question only a stakeholder can answer goes to the open-issues file.
 - **Cite, never copy.** Refer to slices, rules, requirements, and decisions by ID and path.
 - **Pin or derive.** If guessing a detail wrong would violate a requirement, the spec or design pins it; otherwise derive it from the conventions.
+- **The gate is the analyzers, and you answer to it** _[once it exists; cite the architecture-of-record's Static analysis subsection]_. Every suppression carries a reason a reviewer can check; a baseline only shrinks; never weaken a check, suppress a finding, or add a baseline entry to make the build pass without saying so in the pull request.
 - **Code and notebooks are evidence, never authority.** Behavior read back from unspecified code, or a result from an exploratory notebook, is not a requirement until someone decides it is.
 
 ### Running more than one agent

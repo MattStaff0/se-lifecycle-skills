@@ -90,7 +90,7 @@ If the build forces a change from the design, update the design to match.
 ## Phase 4: Test and verify
 
 1. Check the diff against the crosscutting concepts before running anything: authorization at both the route and the data (with a test for each refusal), validation where the conventions say, the injected clock, identifier-only logs, migrations for schema changes; for data, the data tests per output and an idempotent rerun; for ML, evaluation on the held-out set against the baseline and each failure slice, and the fallback. Fix a miss or record it as a deliberate deviation.
-2. Run the full suites (commands in `AGENTS.md`); the developer may run slow ones. Report the result either way.
+2. Run the full suites and the gate command (both in `AGENTS.md`); the developer may run slow ones. Report the result either way. A suppression, a new baseline entry, or a weakened check added to get there is named in the pull request description.
 3. Where practical, run the main path end to end.
 4. Report what passed, what was skipped, and why.
 

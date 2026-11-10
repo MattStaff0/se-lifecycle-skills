@@ -18,7 +18,7 @@ Find out where a project is in the spec-driven cycle, say what comes next and wh
 
 ## Step 1: Diagnose (read only)
 
-Read `AGENTS.md` first: its project types, its Documents table (where each document lives and which template it uses), and any `**Profile:**` line (if one names a profile in `references/profiles/`, read it: it can change templates, the calendar, and a few rules). Then check what exists and how far each is filled beneath its template's instructions: the charter and `.claude/settings.json`; the glossary, vision and scope, open issues, rules; the slice contracts for each project type; requirements; traceability (§1, §2, §3); the architecture-of-record (which sections); designs; experiments; tags and releases. Report:
+Read `AGENTS.md` first: its project types, its Documents table (where each document lives and which template it uses), and any `**Profile:**` line (if one names a profile in `references/profiles/`, read it: it can change templates, the calendar, and a few rules). Then check what exists and how far each is filled beneath its template's instructions: the charter and `.claude/settings.json`; the glossary, vision and scope, open issues, rules; the slice contracts for each project type; requirements; traceability (§1, §2, §3); the architecture-of-record (which sections); designs; experiments; the gate (analyzers in the build, a pull request workflow, checks required on the main branch); tags and releases. Report:
 
 1. **The step the project has reached** in the cycle.
 2. **What the next step needs**, and any deadline the profile sets.
@@ -39,6 +39,7 @@ If there is no `AGENTS.md`, the first item is the charter.
 | Slice list, slice contracts, requirements, traceability | `specification` |
 | Architecture-of-record | `architecture` |
 | Pick the proving slice | here: below |
+| Static analysis and the pull request gate | `static-analysis` |
 | Design a slice; run an experiment | `design` |
 | Estimate, build, review, close | `build` (one slice at a time: `slice`) |
 
@@ -52,7 +53,7 @@ For each document the project's types need, copy its template to the path in the
 
 ### Picking the proving slice
 
-The proving slice is the one that exercises the highest-ranked architecturally significant requirements, crosses the trust boundary, or depends on the riskiest external system or data source; for ML, often the model whose baseline is hardest to beat. Never a login screen or a simple list. Propose candidates with the risks each one exercises; **the team picks**. Then hand off to `design`.
+The proving slice is the one that exercises the highest-ranked architecturally significant requirements, crosses the trust boundary, or depends on the riskiest external system or data source; for ML, often the model whose baseline is hardest to beat. Never a login screen or a simple list. Propose candidates with the risks each one exercises; **the team picks**. Then hand off to `design`, and to `static-analysis` so the gate is on before the first feature merges.
 
 ## Gotchas
 
