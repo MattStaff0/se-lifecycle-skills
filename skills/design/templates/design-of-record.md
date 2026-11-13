@@ -25,6 +25,10 @@ _[One diagram for the whole area (a mermaid `classDiagram` for code; a component
 
 _[One diagram per slice, under its own `###` heading (the anchor traceability cites): a `sequenceDiagram` for a use case, a lineage flowchart (sources → stages → outputs) for a data contract, a pipeline flowchart (data → features → training → evaluation → serving) for a model contract. **Label every interaction or stage with the contract step it implements** (`(step 4)`, `(2a)`), so a reviewer sees every step realized and nothing invented. Use `alt` blocks or branches for failure paths that do more than return an error.]_
 
+## User interface
+
+_[Delete this section if the area has no screens. One `###` per screen, appended per slice: who uses it and in their words (terms from the glossary; a missing term is an `OI-*`, never an invented word), the content in order of importance, the one primary action, the controls, and every state the slice specifies (empty, error, no permission, very long data). **Label each section and action with the contract step it serves** (`(step 3)`), exactly as in the flows: an element that serves no step is scope nobody asked for. The `ui` plugin's `screen` skill drafts this from its screen brief and `forms` adds a form spec; both cite UI rules by ID (`PUI-…`) instead of restating them. Tokens and product-wide UI conventions live in `docs/ui/foundations.md`, not here.]_
+
 ## Contract
 
 _[The interface other people build against, one row per item, appended per slice. Never dropped: before the code exists it is the only thing both sides read._
