@@ -9,6 +9,14 @@
       "name": "sdd",
       "source": "./",
       "description": "The spec-driven cycle for application, data, and ML projects, with templates and human decision gates."
+    },
+    {
+      "name": "ui",
+      "source": {
+        "source": "github",
+        "repo": "MattStaff0/practical-ui-design-skills"
+      },
+      "description": "Companion UI skills (private repo): design foundations, screens, forms, copy, and reviews with checkable rules from Practical UI by Adham Dannaway."
     }
   ]
 }

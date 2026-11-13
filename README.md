@@ -60,6 +60,8 @@ The repository is private; access is by GitHub collaborator.
 
 **Updates:** `/plugin marketplace update spec-driven-dev`, or turn on auto-update for the marketplace under **Marketplaces** in `/plugin`.
 
+**Companion UI skills:** the marketplace also lists `ui` (design foundations, screens, forms, copy, and UI reviews), which lives in a separate private repository: `/plugin install ui@spec-driven-dev` (needs access to that repository). It fills the design-of-record's User interface section and the review checklist's UI pass.
+
 ## Course profile
 
 For TCU's COSC 40943, set `**Profile:** cosc-40943` in the project's `AGENTS.md`: the skills then read the course's templates live (they are not copied here), follow its calendar and checkpoints, and apply its rules. See [`skills/lifecycle/references/profiles/cosc-40943.md`](skills/lifecycle/references/profiles/cosc-40943.md).

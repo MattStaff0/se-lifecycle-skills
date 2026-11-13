@@ -26,6 +26,7 @@ Write it as the first line of the review, so the depth is a decision a teammate 
 ## By project type
 
 - **Data:** every output has its data tests; a rerun produces the same result; a late or malformed input does what the contract says (stop, quarantine, flag); no personal data in logs or fixtures.
+- **UI (any change to a screen):** the screen matches the design's User interface section (section order, the one primary action, every specified state); `/ui:review` ran at a desktop and a phone width on each changed screen, and its High findings are fixed or recorded as accepted deviations; visible words match the glossary. A screen nobody could open is listed as not verified, never a silent pass.
 - **ML:** evaluation runs on the held-out set only (no test-set tuning, no leakage across the split); the model beats the baseline overall **and** on every named failure slice; the fallback is tested; the run is reproducible (versions, seeds, data snapshot); no notebook code was merged as production.
 
 Style, formatting, and unused code are the linter's job; leave them to a non-blocking nit. The gate is green before review starts, and every suppression or baseline change in the diff is read as code: its reason is a claim you can check, and a baseline only shrinks.
